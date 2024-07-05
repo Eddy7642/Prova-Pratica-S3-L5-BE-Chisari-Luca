@@ -1,0 +1,32 @@
+CREATE TABLE [dbo].[ANAGRAFICA] (
+    [idanagrafica] INT            IDENTITY (1, 1) NOT NULL,
+    [Cognome]      NVARCHAR (50)  NULL,
+    [Nome]         NVARCHAR (50)  NULL,
+    [Indirizzo]    NVARCHAR (100) NULL,
+    [Città]        NVARCHAR (50)  NULL,
+    [CAP]          VARCHAR (10)   NULL,
+    [Cod_Fisc]     VARCHAR (16)   NULL,
+    PRIMARY KEY CLUSTERED ([idanagrafica] ASC)
+);
+
+
+CREATE TABLE [dbo].[TIPO_VIOLAZIONE] (
+    [idviolazione] INT            IDENTITY (1, 1) NOT NULL,
+    [descrizione]  NVARCHAR (255) NULL,
+    PRIMARY KEY CLUSTERED ([idviolazione] ASC)
+);
+
+
+CREATE TABLE VERBALE (
+    idverbale INT PRIMARY KEY IDENTITY(1,1),
+    DataViolazione DATE,
+    IndirizzoViolazione NVARCHAR(100),
+    Nominativo_Agente NVARCHAR(50),
+    DataTrascrizioneVerbale DATE,
+    Importo DECIMAL(10, 2),
+    DecurtamentoPunti INT,
+    idanagrafica INT,
+    idviolazione INT,
+    FOREIGN KEY (idanagrafica) REFERENCES ANAGRAFICA(idanagrafica),
+    FOREIGN KEY (idviolazione) REFERENCES TIPO_VIOLAZIONE(idviolazione)
+);
